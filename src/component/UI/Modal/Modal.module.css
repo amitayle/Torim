@@ -1,0 +1,17 @@
+.Modal {
+    z-index: 200;
+    background-color: rgb(234, 216, 213);
+    width: 80%;
+    position: fixed;
+    top: 30%;
+    left: calc(50% - 40%);
+    border: 2px solid rgb(84, 72, 64);
+    border-radius: 10px;
+}
+
+@media(min-width: 768px) {
+    .Modal {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}

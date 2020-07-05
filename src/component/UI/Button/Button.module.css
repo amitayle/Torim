@@ -1,0 +1,26 @@
+.BtnClass {
+    height: 30px;
+    border: 1px solid rgb(100, 86, 77);
+    cursor: pointer;
+    width: 80px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 16px;
+    background-color: rgb(172, 121, 116);
+    font-family: inherit;
+}
+
+.BtnClass:disabled {
+    background-color: rgb(214, 195, 186);
+    color: rgb(228, 219, 203);
+    cursor: default;
+    border: none;
+}
+
+@media(min-width: 768px) {
+    .BtnClass {
+        margin-top: 24px;
+        margin-bottom: 0;
+    }
+}

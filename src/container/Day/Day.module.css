@@ -1,0 +1,30 @@
+.Day {
+    border-left: 1px solid rgb(172, 121, 116);
+    border-right: 1px solid rgb(172, 121, 116); 
+    border-radius: 5px;
+    background-color: rgb(214, 195, 186);
+    color: rgb(84, 72, 64);
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin: 0 4px;
+}
+
+.List {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: scroll;
+    height: 79.5%;
+    margin: 0 auto;
+}
+
+.List::-webkit-scrollbar {
+    display: none;
+}
+
+@media(min-width: 768px) {
+    .Day {
+        width: 15%;
+        height: 100%;
+    }
+}

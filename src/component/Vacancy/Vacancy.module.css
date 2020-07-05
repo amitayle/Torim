@@ -1,0 +1,14 @@
+.Vacancy {
+    border: 1px solid black;
+    background-color: rgb(172, 121, 116);
+    color: white;
+    height: 50px;
+    width: 75%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+

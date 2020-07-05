@@ -1,0 +1,44 @@
+.SideDrawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    margin-top: 70px;
+    height: 100%;
+    width: 280px;
+    max-width: 60%;
+    background: rgb(234, 216, 213);
+    padding: 32px 16px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.Burger {
+   
+    width: 40px;
+    height: 20px;
+    background-color: #fff;
+}
+
+@media(min-width: 768px) {
+    .SideDrawer {
+        display: none;
+    }
+}
+
+.j{
+    background-color: lawngreen;
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(200%);
+}
+
+.Logo {
+    height: 10%;
+    width: 80%;
+    padding-bottom: 16px;
+}

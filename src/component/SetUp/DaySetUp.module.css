@@ -1,0 +1,26 @@
+.Day {
+    margin: 8px;
+}
+
+.InputTime {
+    height: 30px;
+    font-size: 1.8em;
+    border: 1.5px solid rgb(172, 121, 116);
+    border-radius: 8px;
+    padding: 8px 0px 8px 24px;
+    background-color: rgb(214, 195, 186);
+    color: rgb(100, 86, 77);
+}
+
+.Day {
+    border: 1.5px solid rgb(172, 121, 116);
+    padding: 16px 40px;
+    border-radius: 8px;
+}
+
+@media(min-width: 992px) {
+    .Day {
+        border: none;
+        padding: unset;
+    }
+}

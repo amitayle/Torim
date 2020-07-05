@@ -1,0 +1,18 @@
+.Appointment {
+    color: rgb(172, 121, 116);
+    align-items: center;
+    border: 2px solid rgb(172, 121, 116);
+    border-radius: 7px;
+    width: 60%;
+    margin: 8px auto;
+    padding-bottom: 16px;
+}
+
+.Was {
+    color: rgb(214, 195, 186);
+    border-color: rgb(214, 195, 186);
+}
+
+.Details {
+    font-size: 20px;
+}

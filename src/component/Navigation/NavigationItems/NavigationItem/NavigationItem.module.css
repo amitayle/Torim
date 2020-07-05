@@ -1,0 +1,33 @@
+.NavigationItem {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.NavigationItem a {
+    text-decoration: none;
+    color: rgb(172, 121, 116);
+    text-align: right;
+    width: 100%;
+    height: 100%;
+    padding:  8px;
+    font-size: 32px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.NavigationItem a:hover, .NavigationItem a:active, .NavigationItem a.active {
+    color: rgb(84, 72, 64);
+}
+
+@media (min-width: 768px) {
+    .NavigationItem a {
+        text-decoration: none;
+        text-align: center;
+        border-left: 1px solid rgb(84, 72, 64);
+        padding: 0 15px;
+    }
+    .NavigationItem a:hover, .NavigationItem a:active, .NavigationItem a.active {
+        color: rgb(84, 72, 64);
+    }
+}

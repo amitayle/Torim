@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  /* width: 980px; */
+}
+
+.map {
+  color: rgb(234, 216, 213);
+  color: rgb(214, 195, 186);
+  color: rgb(172, 121, 116);
+  color: rgb(100, 86, 77);
+  color: rgb(84, 72, 64);
+}

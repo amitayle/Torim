@@ -1,0 +1,57 @@
+.DrawerToggle {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.Line {
+    height: 3px;
+    width: 30px;
+    background-color: rgb(100, 86, 77);
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+
+.Line::before, .Line::after {
+    height: 3px;
+    width: 30px;
+    position: absolute;
+    background-color: rgb(100, 86, 77);
+    border-radius: 5px;
+    content: '';
+    transition: all .5s ease-in-out;
+}
+
+.Line::before {
+    transform: translateY(-9px) translateX(15px);
+}
+
+.Line::after {
+    transform: translateY(9px) translateX(15px);
+}
+
+/* animation */
+
+.Open .Line {
+    /* transform: translateX(-50px); */
+    background: transparent;
+    box-shadow: none;
+}
+
+.Open .Line::before {
+    transform: rotate(45deg) translate(10px, -10px);
+}
+
+.Open .Line::after {
+    transform: rotate(-45deg) translate(10px,10px);
+}
+
+@media (min-width: 768px) {
+    .DrawerToggle {
+        display: none;
+    }
+}

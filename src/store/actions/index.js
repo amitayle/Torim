@@ -2,17 +2,19 @@ export {
     dateSelected,
     vacancySelected,
     appointmentBooked,
-    getAdminTimes,
+    // getAdminTimes,
     getDuration,
     startBooking,
     bookedSuccessful,
-    bookedFail
+    bookedFail,
+    drawerToggleClicked
 } from './clientActions';
 
 export {
     changeFrom,
     changeTo,
-    addDuration
+    addDuration,
+    getAdminTimes
 } from './adminActions';
 
 export {

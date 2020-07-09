@@ -5,6 +5,7 @@ import * as actions from '../../store/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../component/UI/Input/Input';
 import { Redirect } from 'react-router';
+import Button from '../../component/UI/Button/Button';
 
 
 const Auth = props => {
@@ -28,34 +29,35 @@ const Auth = props => {
 
     const form =
         <div className={classes.Form}>
-            {isSignUp ? null : <Input
-                type={'text'}
-                title={'Name'}
-                placeholder={'Enter your name'}
-                value={name}
-                changed={(event) => setName(event.target.value)} />}
+            {isSignUp ? null :
+                <Input
+                    type={'text'}
+                    title={'שם מלא'}
+                    placeholder={'הכניסי את שמך'}
+                    value={name}
+                    changed={(event) => setName(event.target.value)} />}
 
             <Input
                 type={'email'}
-                title={'Email'}
-                placeholder={'Your Email'}
+                title={'דואר אלקטרוני'}
+                placeholder={'כתובת האימייל שלך'}
                 value={email}
                 changed={(event) => setEmail(event.target.value)} />
 
             <Input
                 type={showPassword ? 'text' : 'password'}
-                title={'Password'}
-                placeholder='Enter Password'
+                title={'סיסמא'}
+                placeholder='הכניסי סיסמא'
                 value={password}
                 changed={(event) => setPassword(event.target.value)} />
-
-            <Input
-                type={'checkbox'}
-                title={'show Password'}
-                checked={showPassword}
-                changed={() => setShowPassword(!showPassword)}
-            />
-
+            <div>
+                <input
+                    className={classes.CheckBox}
+                    type={'checkbox'}
+                    defaultChecked={showPassword}
+                    changed={() => setShowPassword(!showPassword)} />
+                להציג את הסיסמא
+            </div>
         </div>
 
 
@@ -73,7 +75,7 @@ const Auth = props => {
             <h1>{isSignUp ? log : up}</h1>
             <form onSubmit={authHendler}>
                 {form}
-                <button>{isSignUp ? log : up}</button>
+                <Button>{isSignUp ? log : up}</Button>
                 <div className={classes.SwitchMode}>
                     {isSignUp ? 'אם אין לך חשבון' : 'כבר יש לך חשבון'}?
                     <span onClick={switchSignMode}>לחצי כאן</span>

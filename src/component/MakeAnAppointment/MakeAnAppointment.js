@@ -36,22 +36,25 @@ const MakeAnAppointment = props => {
                 <div>ב: <strong> {appointmentDate}</strong> </div>
                 <div>לשעה: <strong>{appointmentTime}</strong></div>
             </div>
-            <Button 
-            clicked={booked} 
+            <Button
+                clicked={booked}
             >{user ? 'אישור' : 'התחברות'}</Button>
             <button onClick={props.canceled} className={classes.BtnCancel}>ביטול</button>
         </div>
     if (spinner) {
         content = <Spinner />
-    }
+    };
     if (errorMessage) {
         content =
             <div>{errorMessage}</div>
-    }
+    };
     if (bookedSuccessful) {
         content =
-            <div className={classes.Success}>התור נקבע.. ניפגש!</div>
-    }
+            <>
+                <div className={classes.Success}>התור נקבע.. ניפגש!</div>
+                <Button clicked={props.canceled}>אישור</Button>
+            </>
+    };
 
 
     return (

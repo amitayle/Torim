@@ -1,34 +1,39 @@
-.Auth{
-    color: rebeccapurple;
-    border: 2px solid rebeccapurple;
+.Auth {
+    color: rgb(172, 121, 116);
+    border: 2px solid rgb(172, 121, 116);
+    border-radius: 8px;
     box-sizing: border-box;
-    width: 60%;
+    width: 40%;
     margin: auto;
-    padding:  20px;
+    padding: 20px;
     padding-top: 0;
     /* height: 200px; */
-    
 }
 
-.Form{
+.Form {
     display: flex;
     flex-flow: column;
-    justify-content: space-around;
     align-items: center;
-    /* height: 80px; */
 }
 
-input{
-    display: block;
+.Form label {
+    margin: 8px;
 }
 
-span{
-    color: blue;
-    text-decoration: underline;
+.Label {
+    float: right;
 }
 
-.SwitchMode{
+.CheckBox{
+    margin-top: 8px;
     cursor: pointer;
+} 
+span {
+    color: rgb(66, 103, 163);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.SwitchMode {
     padding-top: 15px;
 }
-

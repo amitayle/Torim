@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import BackDrop from '../../UI/BackDrop/BackDrop';
 import classes from './SideDrawer.module.css';
-import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
-import Burger from './DrawerToggle/DrawerToggle'
+import { useDispatch } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
-const sideDrawer = props => {
+const SideDrawer = props => {
 
     let attachedClasses = [classes.SideDrawer, classes.Close];
     if (props.show) {
         attachedClasses = [classes.SideDrawer, classes.Open]
     }
 
+    const dispatch = useDispatch();
+    const drawerToggleClicked = useCallback(() =>
+        dispatch(actions.drawerToggleClicked()), [dispatch]);
+
     return (
         <>
-            <BackDrop show={props.show} clicked={props.closed}/>
+            <BackDrop show={props.show} clicked={drawerToggleClicked}/>
             <div className={attachedClasses.join(' ')}>
-                {/* <div className={classes.Logo}>
-                    <Logo />
-                </div> */}
-                <nav onClick={props.closed}>
+                <nav onClick={drawerToggleClicked}>
                     <NavigationItems />
                 </nav>
             </div>
         </>
     );
 }
-export default sideDrawer;
+export default SideDrawer;

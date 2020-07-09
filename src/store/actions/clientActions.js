@@ -59,12 +59,12 @@ export const bookedFail = (errMessage) => {
     };
 };
 
-export const getAdminTimes = (times) => {
-    return {
-        type: actionTypes.GET_ADMIN_TIMES,
-        times: times
-    };
-};
+// export const getAdminTimes = (times) => {
+//     return {
+//         type: actionTypes.GET_ADMIN_TIMES,
+//         times: times
+//     };
+// };
 
 export const getDuration = (duration) => {
     return {
@@ -72,3 +72,9 @@ export const getDuration = (duration) => {
         duration: duration
     };
 };
+
+export const drawerToggleClicked = () => {
+    return {
+        type: actionTypes.DRAWER_TOGGLE_CKLICED
+    }
+}

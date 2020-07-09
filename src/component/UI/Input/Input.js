@@ -9,7 +9,7 @@ const Input = props => (
             value={props.value}
             onChange={props.changed}
             placeholder={props.placeholder}
-            defaultChecked={props.chacked}
+            
         />
     </>
 );

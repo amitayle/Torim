@@ -5,7 +5,6 @@ import Spinner from '.././../component/UI/Spinner/Spinner';
 import Appointment from '../../component/Appointment/Appointment';
 import Modal from '../../component/UI/Modal/Modal';
 import AreYouSure from '../../component/AreYouSure/AreYouSure';
-import firebase from '../../FirebaseInstance';
 import classes from './MyAppointment.module.css';
 
 const MyAppointment = props => {

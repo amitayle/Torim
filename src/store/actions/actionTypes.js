@@ -2,17 +2,19 @@
 export const DATE_SELECTED = 'DATE_SELECTED';
 export const VACANCY_SELECTED = 'VACANCY_SELECTED';
 export const APPOINTMENT_BOOKED = 'APPOINTMENT_BOOKED';
-export const GET_ADMIN_TIMES = 'GET_ADMIN_TIMES';
+// export const GET_ADMIN_TIMES = 'GET_ADMIN_TIMES';
 export const GET_DURATION = 'GET_DURATION';
 export const START_BOOKING = 'START_BOOKING';
 export const BOOKED_SUCCESSFUL = 'BOOKED_SUCCESSFUL';
 export const BOOKED_FAIL = 'BOOKED_FAIL';
+export const DRAWER_TOGGLE_CKLICED = 'DRAWER_TOGGLE_CKLICED';
 
 
 //admin
 export const CHANGE_FROM = 'CHANGE_FROM';
 export const CHANGE_TO = 'CHANGE_TO';
 export const ADD_DURATION = 'ADD_DURATION';
+export const ADD_TIMES = 'ADD_TIMES';
 
 
 //auth

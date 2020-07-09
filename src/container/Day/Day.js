@@ -16,10 +16,12 @@ const Day = props => {
 
     const namesOfTheDays = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
     const [vacancyList, setVacancyList] = useState(null);
+    const [bookedTimes] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const timesOfDay = useSelector(state => state.client.adminTimes);
+    const timesOfDay = useSelector(state => state.admin.times);
     const durationOfMeeting = useSelector(state => state.client.durationOfMeeting);
     const bookedSuccessful = useSelector(state => state.client.bookedSuccessful);
+    const isAdmin = useSelector(state => state.auth.isAdmin);
     const dayName = namesOfTheDays[props.date.getDay()];
 
     const dispatch = useDispatch();
@@ -63,7 +65,6 @@ const Day = props => {
     }, [props.date]);
 
     const filterBookedTimes = useCallback(() => {
-        const bookedTimes = [];
         const date = dateFormater();
         firebase.database()
             .ref('/client/bookedAppointment')
@@ -82,7 +83,7 @@ const Day = props => {
                 });
                 setVacancyList(vList);
             });
-    }, [dateFormater, getTimesList]);
+    }, [dateFormater, getTimesList, bookedTimes]);
 
     const vacancyClicked = (time) => {
         const sTime = timeSeparator(time)
@@ -91,24 +92,39 @@ const Day = props => {
         toggleModal();
     };
 
+    const AdminClickedVacancy = (time) => {
+        // toggleModal();
+    }
+
+    const timeIsPast = (time) => {
+        const nowTime = new Date().getTime()
+        const t = timeSeparator(time)
+        return props.date.setHours(t[0], t[1]) < nowTime
+
+    };
+
     let listOfDay = <Spinner />
     if (vacancyList !== null) {
-        listOfDay = vacancyList.filter(time => {
-            const nowTime = new Date().getTime()
-            const t = timeSeparator(time)
-            const timeIsPast = props.date.setHours(t[0], t[1]) < nowTime
-            if (timeIsPast) {
-                return false
-            }
-            return true
-        }).map(time => (
-            <Vacancy
-                key={time}
-                time={time}
-                clicked={() => vacancyClicked(time)} />
-        ));
+        if (isAdmin) {
+            listOfDay = bookedTimes.map(time => (
+                <Vacancy
+                    key={time}
+                    time={time}
+                    was={timeIsPast(time)}
+                    clicked={() => AdminClickedVacancy(time)} />
+            ));
+        } else {
+            listOfDay = vacancyList.filter(time => {
+                return !timeIsPast(time);
+            }).map(time => (
+                <Vacancy
+                    key={time}
+                    time={time}
+                    clicked={() => vacancyClicked(time)} />
+            ));
+        };
         if (listOfDay.length === 0) {
-            listOfDay = <h2>לצערינו אין תורים פנוים </h2>
+            listOfDay =  isAdmin ? <h2>לא הוזמנו תורים</h2> : <h2>לצערינו אין תורים פנוים </h2>
         };
     };
 

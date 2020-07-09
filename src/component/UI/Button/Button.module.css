@@ -1,8 +1,9 @@
 .BtnClass {
-    height: 30px;
+    min-height: 30px;
     border: 1px solid rgb(100, 86, 77);
     cursor: pointer;
-    width: 80px;
+    min-width: 80px;
+    padding: 8px;
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -21,6 +22,6 @@
 @media(min-width: 768px) {
     .BtnClass {
         margin-top: 24px;
-        margin-bottom: 0;
+        /* margin-bottom: 0; */
     }
 }

@@ -7,11 +7,12 @@ const initialState = {
     date: '',
     time: '',
     miliseconds: '',
-    adminTimes: [],
+    // adminTimes: [],
     durationOfMeeting: 0,
     spinner: false,
     errMessage: null,
-    bookedSuccessful: false
+    bookedSuccessful: false,
+    drawerOpen: false
 };
 
 const dateSelected = (state, action) => {
@@ -28,20 +29,20 @@ const vacancySelected = (state, action) => {
     });
 };
 
-const getAdminTimes = (state, action) => {
-    return updateObject(state, { adminTimes: action.times });
-}
+// const getAdminTimes = (state, action) => {
+//     return updateObject(state, { adminTimes: action.times });
+// };
 
 const getDuration = (state, action) => {
     return updateObject(state, { durationOfMeeting: action.duration });
-}
+};
 
 const startBooking = (state, action) => {
     return updateObject(state, {
         spinner: true,
         errMessage: null
     });
-}
+};
 
 const bookedSuccessful = (state, action) => {
     return updateObject(state, {
@@ -49,7 +50,7 @@ const bookedSuccessful = (state, action) => {
         errMessage: null,
         bookedSuccessful: true
     });
-}
+};
 
 const bookedFail = (state, action) => {
     return updateObject(state, {
@@ -57,17 +58,24 @@ const bookedFail = (state, action) => {
         errMessage: action.errorMessage,
         bookedSuccessful: false
     })
-}
+};
+
+const drawerToggleClicked = (state, action) => {
+    return updateObject(state, {
+        drawerOpen: !state.drawerOpen
+    });
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.DATE_SELECTED: return dateSelected(state, action);
         case actionTypes.VACANCY_SELECTED: return vacancySelected(state, action);
-        case actionTypes.GET_ADMIN_TIMES: return getAdminTimes(state, action);
+        // case actionTypes.GET_ADMIN_TIMES: return getAdminTimes(state, action);
         case actionTypes.GET_DURATION: return getDuration(state, action);
         case actionTypes.START_BOOKING: return startBooking(state, action);
         case actionTypes.BOOKED_SUCCESSFUL: return bookedSuccessful(state, action);
         case actionTypes.BOOKED_FAIL: return bookedFail(state, action);
+        case actionTypes.DRAWER_TOGGLE_CKLICED: return drawerToggleClicked(state, action);
         default: return state;
     }
 }

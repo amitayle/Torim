@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import DaySetUp from '../../component/SetUp/DaySetUp';
 import classes from './Admin.module.css';
-import axios from '../../Axios';
-import { connect } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import * as action from '../../store/actions/index';
 import { updateObject, timeSeparator } from '../../utility';
 import Modal from '../../component/UI/Modal/Modal';
 import firebase from '../../FirebaseInstance';
-
+import Button from '../../component/UI/Button/Button';
 
 
 const Admin = props => {
@@ -18,15 +17,24 @@ const Admin = props => {
     const toggleModal = () => setShowModal(!showModal);
 
     const dayNames = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
-    const appointmentTimes = ['15','30', '45', '60', '90', '120'];
+    const appointmentTimes = ['15', '30', '45', '60', '90', '120'];
     const optionsTime = appointmentTimes.map(time => (
         <option key={time} value={time} >{time}</option>
     ));
+
+    const dispatch = useDispatch();
+    const getAdminTimes = useCallback(() =>
+        dispatch(action.getAdminTimes(true)), [dispatch]);
+    const addDuration = useCallback((duration) =>
+        dispatch(action.addDuration(duration)), [dispatch]);
+    const times = useSelector(state => state.admin.setUpTimes);
+    const duration = useSelector(state => state.admin.duration);
+
     const setUpAllDays = dayNames.map((day, index) => (
         <DaySetUp key={day} day={day} dayNumber={index + 1} />
     ));
 
-
+    //get the minutes from the opening time to close time
     const getAllMinutes = (from, to) => {
         const a = new Date();
         const b = new Date();
@@ -39,51 +47,35 @@ const Admin = props => {
 
     const onSetUp = (event) => {
         event.preventDefault()
-        let times = props.times
+        let Ntimes = times
+        console.log(times);
+
         for (const day in times) {
             const from = timeSeparator(times[day].from);
             const to = timeSeparator(times[day].to);
             const minutes = getAllMinutes(from, to);
             const updatedDay = updateObject(times[day], { minutesInDay: minutes });
-            const updatedTimes = updateObject(times, { [day]: updatedDay });
-            times = updatedTimes;
+            const updatedTimes = updateObject(Ntimes, { [day]: updatedDay });
+            Ntimes = updatedTimes;
         };
-        props.addDuration(durationOfMeeting);
+        addDuration(durationOfMeeting);
 
         //todo: move to action
         Promise.all([
-            firebase.database().ref('/admin/times').set(times),
+            firebase.database().ref('/admin/times').set(Ntimes),
             firebase.database().ref('/admin/durationOfMeeting').set(durationOfMeeting)
         ]).then(([times, duration]) => {
             toggleModal();
-        }).catch(err =>{
+        }).catch(err => {
             console.log(err.message);
-            
+
         });
     };
 
 
     useEffect(() => {
-        //todo: move to action
-        axios.get('/admin/times.json')
-            .then(response => {
-                for (const day in response.data) {
-                    if (day !== '0') {
-                        props.onChangeFrom(day, response.data[day].from)
-                        props.onChangeTo(day, response.data[day].to)
-                    }
-                }
-            }).catch(err => {
-                console.log(err.message);//todo: error hendel
-            });
-
-        axios.get('/admin/durationOfMeeting.json')
-            .then(response => {
-                setDurtionOfMeeting(response.data)
-                props.addDuration(response.data)
-            });
-    }, []);
-
+        getAdminTimes()
+    }, [getAdminTimes]);
 
 
     return (
@@ -91,14 +83,14 @@ const Admin = props => {
             <Modal
                 show={showModal}
                 closeModal={toggleModal}>
-                <h2>marchaba</h2>
-                <button onClick={toggleModal}>ok</button> </Modal>
-            <h1>מילוי תורים</h1>
-
+                <h2>זמני העבודה עודכנו</h2>
+                <Button clicked={toggleModal}>אישור</Button>
+            </Modal>
+            <h1> הזנת שעות עבודה</h1>
             <form onSubmit={onSetUp} >
-                <h3>אורך פגישה:</h3>
+                <label>אורך פגישה:</label>
                 <select
-                    value={durationOfMeeting}
+                    value={duration}
                     onChange={(event) => setDurtionOfMeeting(event.target.value)}>
                     {optionsTime}
                 </select>
@@ -106,28 +98,12 @@ const Admin = props => {
                     {setUpAllDays}
                 </div>
                 <br />
-                <button >OK</button>
+                <button >עידכון </button>
             </form>
-
         </div>
     );
 
 };
 
-const mapStateToProps = state => {
-    return {
-        times: state.admin.times,
-        duration: state.admin.duration,
-        uid: state.auth.userId
-    };
-};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onChangeFrom: (day, time) => dispatch(action.changeFrom(day, time)),
-        onChangeTo: (day, time) => dispatch(action.changeTo(day, time)),
-        addDuration: (duration) => dispatch(action.addDuration(duration))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+export default Admin;
